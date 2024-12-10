@@ -18,54 +18,55 @@ if (os.path.isfile(FILE)):
 
     if (len(raw_tasks) > 0):
         tasks = json.loads(raw_tasks.replace("'", '"'))
-        print(tasks)
 
 while True:
     # User selects the action
-    action = input("Select the action you want to perform:\n"
-                   "1. Create a task\n2. Edit a task\n"
-                   "3. Delete a task\n4. List all tasks\n"
-                   "5. Check/Uncheck a task\n"
-                   "0. End the program\n\n")
-    
-    # Checks that the action is valid
-    if not action.isnumeric():
-        print("Invalid action\n")
-        continue
+    try:
+        action = input("Select the action you want to perform:\n"
+                    "1. Create a task\n2. Edit a task\n"
+                    "3. Delete a task\n4. List all tasks\n"
+                    "5. Check/Uncheck a task\n"
+                    "0. End the program\n")
+        
+        # Checks that the action is valid
+        if not action.isnumeric():
+            print("Invalid action\n")
+            continue
 
-    action = int(action)
-    if action == 1:
-        # Creates a new task
-        task_name = input("Insert the name of the task: ")
-        create(tasks, task_name)
-        list(tasks)
-        print("\n")
-    elif action == 2:
-        # Edits an existing task
-        task_name = input("Insert the name of the task you want to edit: ")
-        new_task_name = input("Insert the new name of the task: ")
-        task_id = tasks.index(task_name)
-        edit(tasks, task_id, new_task_name)
-        list(tasks)
-    elif action == 3:
-        # Deletes a task
-        task_name = input("Insert the name of the task you want to delete: ")
-        task_id = tasks.index(task_name)
-        delete(tasks, task_id)
-        list(tasks)
-    elif action == 4:
-        # Displays all tasks
-        print("List of saved tasks")
-        list(tasks)
-    elif action == 5:
-        # Checks/Unchecks a task
-        task_name = input("Insert the name of the task you want to check/uncheck: ")
-        task_id = tasks.index(task_name)
-        check_task(tasks, task_id)
-        list(tasks)
-    elif action == 0:
-        # Saves the tasks in the file and ends the program
-        fout = open(FILE    , 'w')
-        fout.write(json.dumps(tasks))
-        print("Program ended")
-        break;
+        action = int(action)
+        if action == 1:
+            # Creates a new task
+            task_name = input("Insert the name of the task: ")
+            create(tasks, task_name)
+            list(tasks)
+            print("\n")
+        elif action == 2:
+            # Edits an existing task
+            task_name = input("Insert the name of the task you want to edit: ")
+            new_task_name = input("Insert the new name of the task: ")
+            edit(tasks, task_name, new_task_name)
+            list(tasks)
+        elif action == 3:
+            # Deletes a task
+            task_name = input("Insert the name of the task you want to delete: ")
+            delete(tasks, task_name)
+            list(tasks)
+        elif action == 4:
+            # Displays all tasks
+            print("List of saved tasks")
+            list(tasks)
+        elif action == 5:
+            # Checks/Unchecks a task
+            task_name = input("Insert the name of the task you want to check/uncheck: ")
+            check_task(tasks, task_name)
+            list(tasks)
+        elif action == 0:
+            # Saves the tasks in the file and ends the program
+            fout = open(FILE    , 'w')
+            fout.write(json.dumps(tasks))
+            print("Program ended")
+            break;
+    except ValueError:
+        print('There was an error')
+    except Exception:
+        print('There was an exception')

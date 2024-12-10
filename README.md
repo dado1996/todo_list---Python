@@ -6,12 +6,12 @@ Simple python application to save a list of tasks and check them when done
 - [Installation](#installation)
 - [Features](#features)
 - [Usage](#usage)
-- [License](#licenses)
+- [Contact](#contact)
 
 ## Installation
 1. Clone the repo
 ```bash
-git clone https://github.com/
+git clone https://github.com/dado1996/
 ````
 
 2. Run
